@@ -1,0 +1,53 @@
+body {
+    margin: 0px;
+    font-family:'lucida console';
+    background-color: #7F00FF;
+    color: white;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: #9999FF;
+}
+
+header .have-border {
+    border: 1px white solid;
+    padding-top: 1vh;
+}
+
+header div nav {
+    padding-top: 0.5vh;
+    text-align: center;
+    text-decoration: underline;
+}
+
+a, a.visted {
+    color: white;
+}
+
+#settings {
+    margin-left: 1vw;
+    padding: 1vh 1vw;
+}
+
+header div h1{
+    padding-top: 6vh;
+    text-align: center;
+}
+
+header form {
+    padding-top: 2.5vh;
+    text-align: center;
+}
+
+#search input, #search button {
+    margin-bottom: 1vh;
+    background-color:  #CCE5FF;
+    color: #9B5BFF;
+}
+
+.playlist-title {
+    text-align: center;
+    margin: 5vh;
+}
