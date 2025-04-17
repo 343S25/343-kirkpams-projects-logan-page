@@ -50,5 +50,29 @@ header form {
 
 #playlist-title {
     text-align: center;
-    margin: 5vh;
+    margin-top: 7vh;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-around;
+    flex-basis: 25%;
+}
+
+#gallery div {
+    flex-basis: 25%;
+    margin-top: 10vh;
+}
+
+#gallery div img {
+    width: 15vw;
+    height: 30vh;
+}
+
+#gallery div p {
+    margin: 0px;
+    /*max-width: 15vw;
+    margin-left: 5vw;*/
 }

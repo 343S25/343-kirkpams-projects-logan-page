@@ -77,3 +77,52 @@ document.getElementById ('playlist_name').addEventListener ('click', function (e
     let playlist_name = document.getElementById ('playlist-title');
     playlist_name.textContent = document.getElementById ('playlist-name').value;
 });
+
+document.getElementById ('search-btn').addEventListener ('click', async function (event) {
+    event.preventDefault ();
+    
+    let accessToken = window.localStorage.getItem('access_token');
+
+    let song_title = document.getElementById ('song').value;
+    let artist = document.getElementById ('artist').value;
+
+    let query = `${song_title} ${artist}`; // Create search query
+    let url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`;
+      
+    let response = await fetch(url, {
+        headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    });
+      
+    let data = await response.json();
+    
+    let gallery = document.getElementById ('gallery');
+
+    let div = document.createElement ('div');
+
+    let figure = document.createElement ('figure');
+
+    let img = document.createElement ('img');
+    img.src = data.tracks.items[0].album.images[0].url;
+    img.alt = `${song_title} - ${artist}`;
+    figure.appendChild (img);
+
+    let song = document.createElement ('p');
+    song.textContent = data.tracks.items[0].name;
+    song.style.textDecoration = 'underline';
+    figure.appendChild (song);
+
+    let musician = document.createElement ('p');
+    let music_people = []
+    for (let dude of data.tracks.items[0].artists)
+    {
+        music_people.push (dude.name);
+    }
+    musician.textContent = music_people.join (", ");
+    musician.style.fontStyle = 'italic';
+    figure.appendChild (musician);
+
+    div.appendChild (figure);
+    gallery.appendChild (div);
+});
