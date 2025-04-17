@@ -9,18 +9,18 @@ header {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     background-color: #9999FF;
+    color: white;
     font-family: 'lucida sans';
 }
 
 header .have-border {
-    border: 1px white solid;
-    padding-top: 1vh;
+    border: 2px white solid;
 }
 
 header div nav {
-    padding-top: 0.5vh;
     text-align: center;
     text-decoration: underline;
+    padding-top: 1vh;
 }
 
 a, a.visted {
@@ -33,7 +33,7 @@ a, a.visted {
 }
 
 header div h1{
-    padding-top: 6vh;
+    padding-top: 6.5vh;
     text-align: center;
 }
 
@@ -43,12 +43,12 @@ header form {
 }
 
 #search input, #search button {
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     background-color:  #CCE5FF;
     color: #9B5BFF;
 }
 
-.playlist-title {
+#playlist-title {
     text-align: center;
     margin: 5vh;
 }

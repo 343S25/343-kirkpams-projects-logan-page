@@ -40,3 +40,13 @@ img {
     margin: 0px;
     font-size: 1rem;
 }
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+ol {
+    text-align: start;
+}

@@ -8,69 +8,69 @@
     <title>Listening Gallery</title>
 </head>
 
-<body>
-    <header>
-        <div id="header-text" class="have-border">
+<body id="body">
+    <header id="header">
+        <div id="links" class="have-border">
             <nav>
-                <a href="https://open.spotify.com/"><h2>Spotify</h2></a>
+                <a id="spotify" href="https://open.spotify.com/"><h2>Spotify</h2></a>
 
-                <a href="index.html"><h2>Info</h2></a>
+                <a id="info" href="index.html"><h2>Info</h2></a>
 
                 <h2 data-bs-toggle="dropdown">Customize</h2>
                 <div id="settings" class="dropdown-menu">
                     <label for="color">Header Background Color</label>
-                    <input type="color" name="hb-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="hb-color">
+                    <button id="header_bg" type="button">Change Color</button>
                     <br><br>
 
                     <label for="color">Header Text Color</label>
-                    <input type="color" name="ht-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="ht-color">
+                    <button id="header_text" type="button">Change Color</button>
                     <br><br>
 
                     <label for="color">Header Border Color</label>
-                    <input type="color" name="hbr-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="hbr-color">
+                    <button id="header_border" type="button">Change Color</button>
                     <br><br>
 
                      <label for="color">Search Box Background Color</label>
-                    <input type="color" name="sb-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="sb-color">
+                    <button id="search_bg" type="button">Change Color</button>
                     <br><br>
 
                     <label for="color">Search Box Text Color</label>
-                    <input type="color" name="st-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="st-color">
+                    <button id="search_text" type="button">Change Color</button>
                     <br><br>
 
                     <label for="color">Body Background Color</label>
-                    <input type="color" name="bb-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="bb-color">
+                    <button id="body_bg" type="button">Change Color</button>
                     <br><br>
 
                     <label for="color">Body Text Color</label>
-                    <input type="color" name="bt-color">
-                    <button type="button" name="change">Change Color</button>
+                    <input type="color" id="bt-color">
+                    <button id="body_text" type="button">Change Color</button>
                     <br><br>
 
                     <label for="item-name">Playlist Name</label>
-                    <input type="text" name="playlist-name" placeholder="Gallery Name">
-                    <button type="button" name="generate">Change Name</button>
+                    <input type="text" id="playlist-name" placeholder="Gallery Name">
+                    <button id="playlist_name" type="button">Change Name</button>
                 </div>
             </nav>
         </div>
 
-        <div class="have-border">
+        <div id="title" class="have-border">
             <h1>Listening Gallery</h1>
         </div>
 
-        <div id="search-text" class="have-border">
+        <div id="search-box" class="have-border">
             <form id="search">
                 <div>
-                    <input type="text" name="song" placeholder="Song">
+                    <input type="text" id="song" placeholder="Song">
                 </div>
                 <div>
-                    <input type="text" name="artist" placeholder="Artist">
+                    <input type="text" id="artist" placeholder="Artist">
                 </div>
                 <div>
                     <button type="submit" id="search-btn">Search</button>
@@ -79,11 +79,11 @@
         </div>
     </header>
 
-    <h2 id="body-text" class="playlist-title">Gallery Name</h2>
+    <h2 id="playlist-title">Gallery Name</h2>
 
     <section></section>
 
+    <script src="scripts/LG.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 </body>
 </html>
