@@ -2,7 +2,7 @@ body {
     margin: 0px;
     font-family:'lucida console';
     font-size: 1.5rem;
-    background-color: #7F00FF;
+    background-color: #9999FF;
     color: white;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -10,12 +10,33 @@ body {
 
 h1 {
     text-decoration: underline;
+    font-family: 'lucida sans';
 }
 
 a, a.visted {
     color: white;
+    font-family: 'lucida sans';
 }
 
 body .side {
-    background-color: #9999FF;
+    background-color: #7F00FF;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+body .middle {
+    text-align: center;
+    margin: 1vh 1vw;
+}
+
+img {
+    width: 15vw;
+    height: 30vh;
+}
+
+.info {
+    margin: 0px;
+    font-size: 1rem;
 }

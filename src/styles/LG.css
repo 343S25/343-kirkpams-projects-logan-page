@@ -9,6 +9,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     background-color: #9999FF;
+    font-family: 'lucida sans';
 }
 
 header .have-border {
