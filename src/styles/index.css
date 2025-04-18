@@ -1,7 +1,7 @@
 body {
     margin: 0px;
     font-family:'lucida console';
-    font-size: 1.5rem;
+    font-size: 3.5vh;
     background-color: #9999FF;
     color: white;
     display: grid;
@@ -31,6 +31,9 @@ body .middle {
     margin: 1vh 1vw;
 }
 
+body #instructions {
+    text-align: start;
+}
 img {
     width: 15vw;
     height: 30vh;
@@ -38,7 +41,7 @@ img {
 
 .info {
     margin: 0px;
-    font-size: 1rem;
+    font-size: 2.5vh;
 }
 
 nav {
@@ -49,4 +52,26 @@ nav {
 
 ol {
     text-align: start;
+}
+
+@media (max-width: 384px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        font-size: 3vh;
+    }
+
+    body .side {
+        flex-direction: row;
+    }
+
+    img {
+        width: 20vw;
+        height: 15vh;
+    }
+
+    .info {
+        font-size: 1.5vh;
+    }
 }
