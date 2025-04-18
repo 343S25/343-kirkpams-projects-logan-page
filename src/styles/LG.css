@@ -54,6 +54,7 @@ header form {
 
 #playlist-title {
     text-align: center;
+    text-decoration: underline;
     margin-top: 7vh;
 }
 
@@ -72,7 +73,7 @@ header form {
 
 #gallery div img {
     width: 15rem;
-    height: 30vh;
+    height: auto;
 }
 
 #gallery div p {
@@ -81,7 +82,7 @@ header form {
     margin-left: 5vw;*/
 }
 
-@media (max-width: 384px) {
+@media (max-width: 500px) {
     #gallery {
         flex-direction: column;
         flex-basis: 100%;
