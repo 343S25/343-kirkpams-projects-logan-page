@@ -155,48 +155,105 @@ document.getElementById ('search-btn').addEventListener ('click', async function
         cover: data.tracks.items[0].album.images[0].url,
         title: data.tracks.items[0].name,
         artists: data.tracks.items[0].artists,
+        track: data.tracks.items[0].uri
     };
     
+    art_list.push (art);
+
+    addArt (art);
+
+    localStorage.setItem ('art_list', JSON.stringify (art_list));
+});
+
+// helper function for adding art to the page
+function addArt (art)
+{
     let gallery = document.getElementById ('gallery');
+    let template = document.getElementById ('art-template');
 
-    let div = document.createElement ('div');
+    let artView = template.content.cloneNode (true);
 
-    let figure = document.createElement ('figure');
-
-    let img = document.createElement ('img');
-    img.src = art.cover;
-    img.alt = `${art.title} - ${art.artists}`;
-    figure.appendChild (img);
-
-    let song = document.createElement ('p');
-    song.textContent = art.title;
-    song.style.textDecoration = 'underline';
-    figure.appendChild (song);
-
-    let musician = document.createElement ('p');
     let music_people = []
     for (let dude of art.artists)
     {
         music_people.push (dude.name);
-    }
+    }    
+        
+    let img = artView.getElementById ('image-template');
+    img.src = art.cover;
+    img.alt = `Missing Cover: {${art.title} by ${music_people.join (', ')}}`;
+
+    let song = artView.getElementById ('title-template');
+    song.textContent = art.title;
+    song.style.textDecoration = 'underline';
+
+    let musician = artView.getElementById ('artist-template');
     musician.textContent = music_people.join (", ");
     musician.style.fontStyle = 'italic';
-    figure.appendChild (musician);
 
-    div.appendChild (figure);
-    gallery.appendChild (div);
+    // allow the ability to play/pause the song after the image is clicked
+    img.addEventListener ('click', async function () {
+        let access_token = localStorage.getItem ('access_token');
 
-    art_list.push (art);
-    localStorage.setItem ('art_list', JSON.stringify (art_list));
-});
+        // get current devices ID
+        let url = 'https://api.spotify.com/v1/me/player/devices';
+
+        let response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${access_token}`,
+            },
+        });
+        let resp = await response.json ();
+        let deviceID = resp.devices;
+        let trackUri = art.track;
+
+        // check if spotify is playing a song
+        let playing = await fetch('https://api.spotify.com/v1/me/player', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${access_token}`,
+            }
+        });
+        let is_playing = await playing.json();
+
+        // pauses if true, plays otherwise
+        if (is_playing.is_playing)
+        {
+            await fetch('https://api.spotify.com/v1/me/player/pause', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                }
+            });
+        }
+        else
+        {
+            let playUrl = 'https://api.spotify.com/v1/me/player/play';
+
+            await fetch(playUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    uris: [trackUri],
+                    device_ids: [deviceID]
+                })
+            })
+        }
+    });
+
+    gallery.appendChild (artView);
+}
 
 // clear all songs from the page and local storage;
 document.getElementById ('clear-btn').addEventListener ('click', function (event){
     event.preventDefault ();
 
-    document.getElementById ('gallery').innerHTML = '';
     localStorage.removeItem ('art_list');
-    art_list = [];
+    location.reload ();
 });
 
 // clear all customizations
@@ -269,7 +326,6 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
 
 // Add local storage songs to the page and color changes
 (function () {
-
     // load customizations
     let header_bg = document.getElementById ('header');
     header_bg.style.backgroundColor = localStorage.getItem ('header_bg'); 
@@ -333,37 +389,8 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     }
 
     // load songs
-    for (let art of art_list)
-    {
-        let gallery = document.getElementById ('gallery');
-
-        let div = document.createElement ('div');
-
-        let figure = document.createElement ('figure');
-
-        let img = document.createElement ('img');
-
-        let musician = document.createElement ('p');
-        let music_people = []
-        for (let dude of art.artists)
-        {
-            music_people.push (dude.name);
-        }
-        
-        img.src = art.cover;
-        img.alt = `Missing Cover: {${art.title} by ${music_people.join (', ')}}`;
-        figure.appendChild (img);
-
-        let song = document.createElement ('p');
-        song.textContent = art.title;
-        song.style.textDecoration = 'underline';
-        figure.appendChild (song);
-
-        musician.textContent = music_people.join (", ");
-        musician.style.fontStyle = 'italic';
-        figure.appendChild (musician);
-
-        div.appendChild (figure);
-        gallery.appendChild (div);
-    }
+   for (let art of art_list)
+   {
+        addArt (art);
+   }
 })();
