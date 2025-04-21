@@ -11,6 +11,8 @@ header {
     background-color: #9999FF;
     color: white;
     font-family: 'lucida sans';
+    top: 0%;
+    position: sticky;
 }
 
 header .have-border {
