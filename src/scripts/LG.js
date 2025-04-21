@@ -160,13 +160,13 @@ document.getElementById ('search-btn').addEventListener ('click', async function
     
     art_list.push (art);
 
-    addArt (art);
+    addArt (art, art_list.length - 1);
 
     localStorage.setItem ('art_list', JSON.stringify (art_list));
 });
 
 // helper function for adding art to the page
-function addArt (art)
+function addArt (art, index)
 {
     let gallery = document.getElementById ('gallery');
     let template = document.getElementById ('art-template');
@@ -243,6 +243,14 @@ function addArt (art)
                 })
             })
         }
+    });
+
+    // removes a single song if cover is double clicked
+    artView.getElementById ('remove').addEventListener ('click', function () {
+        art_list.splice (index, 1);
+
+        localStorage.setItem ('art_list', JSON.stringify (art_list));
+        location.reload ();
     });
 
     gallery.appendChild (artView);
@@ -389,8 +397,8 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     }
 
     // load songs
-   for (let art of art_list)
+   for (let i = 0; i < art_list.length; i++)
    {
-        addArt (art);
+        addArt (art_list[i], i);
    }
 })();
