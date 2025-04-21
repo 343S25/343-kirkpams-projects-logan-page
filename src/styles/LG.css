@@ -42,6 +42,10 @@ header form {
     text-align: center;
 }
 
+header form div input{
+    max-width: 25vw;;
+}
+
 #search input, #search button {
     margin: 1vh;
     background-color:  #CCE5FF;
