@@ -88,9 +88,21 @@ header form div input{
     margin-left: 5vw;*/
 }
 
+@media (max-width: 950px) {
+    #gallery {
+        flex-basis: 33%;
+    }
+}
+
+@media (max-width: 800px) {
+    #gallery {
+        flex-basis: 50%;
+    }
+}
+
+
 @media (max-width: 500px) {
     #gallery {
-        flex-direction: column;
         flex-basis: 100%;
     }
 }

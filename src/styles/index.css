@@ -51,11 +51,12 @@ nav {
     justify-content: space-around;
 }
 
-ol {
+ol li{
     text-align: start;
+    margin: 2vh 1vw
 }
 
-@media (max-width: 500px) {
+@media (max-width: 900px) {
     body {
         display: grid;
         grid-template-columns: 1fr;

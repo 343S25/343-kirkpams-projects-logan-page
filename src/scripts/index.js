@@ -26,7 +26,7 @@ document.getElementById ('verify').addEventListener ('click', async () => {
         let codeChallenge = base64encode(hashed);
 
         let clientId = '87b63813aa7e46cab0a2c657a4eb1564';
-        let redirectUri = 'https://w3stu.cs.jmu.edu/pagelr/cs343/project/src/index.html';
+        let redirectUri = 'https://w3stu.cs.jmu.edu/pagelr/cs343/project/index.html';
 
         let scope = 'user-library-read playlist-read-private user-read-playback-state user-modify-playback-state';
         let authUrl = new URL("https://accounts.spotify.com/authorize")
@@ -73,7 +73,7 @@ document.getElementById ('token').addEventListener ('click', async function (eve
                 client_id: "87b63813aa7e46cab0a2c657a4eb1564",
                 grant_type: 'authorization_code',
                 code: code,
-                redirect_uri: "https://w3stu.cs.jmu.edu/pagelr/cs343/project/src/index.html",
+                redirect_uri: "https://w3stu.cs.jmu.edu/pagelr/cs343/project/index.html",
                 code_verifier: codeVerifier,
             })
         }
