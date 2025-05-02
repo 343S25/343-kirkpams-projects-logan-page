@@ -22,32 +22,32 @@
                     <label for="hb-color">Header Background Color</label>
                     <input type="color" id="hb-color">
                     <button id="header_bg" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                     <label for="ht-color">Header Text Color</label>
                     <input type="color" id="ht-color">
                     <button id="header_text" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                     <label for="hbr-color">Header Border Color</label>
                     <input type="color" id="hbr-color">
                     <button id="header_border" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                      <label for="sb-color">Search Box Background Color</label>
                     <input type="color" id="sb-color">
                     <button id="search_bg" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                     <label for="st-color">Search Box Text Color</label>
                     <input type="color" id="st-color">
                     <button id="search_text" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                     <label for="bb-color">Body Background Color</label>
                     <input type="color" id="bb-color">
                     <button id="body_bg" type="button">Change Color</button>
-                    <br><br>
+                    <br>
 
                     <label for="bt-color">Body Text Color</label>
                     <input type="color" id="bt-color">
@@ -59,7 +59,15 @@
                     <button id="playlist_name" type="button">Change Name</button>
                     <br><br>
 
-                    <button id="clear_customs" type="button">Clear Customizations</button>
+                    <button type="button" id="clear_customs">Clear Customs</button>
+                    <button type="button" id="clear-btn">Clear Songs</button>
+                    <br><br>
+
+                    <input type="file" name="import-file" id="import-file">
+                    <button type="button" id="import">Import</button>
+                    <br><br>
+
+                    <button type="button" id="export">Export</button>
                 </div>
             </nav>
         </div>
@@ -78,7 +86,6 @@
                 </div>
                 <div>
                     <button type="submit" id="search-btn">Search</button>
-                    <button type="button" id="clear-btn">clear</button>
                 </div>
             </form>
         </div>
@@ -90,7 +97,8 @@
         <template id="art-template">
             <div>
                 <figure>
-                    <img id="image-template" src="No Source" alt="">
+                    <img id="image-template" src="No Source" alt="" data-bs-toggle="dropdown">
+                    <iframe id="frame" class="dropdown-menu" title="song-widget"></iframe>
                     <p id="title-template"></p>
                     <p id="artist-template"></p>
                     <p id="remove"><b>REMOVE</b></p>

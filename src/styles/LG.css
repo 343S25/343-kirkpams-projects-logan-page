@@ -62,6 +62,7 @@ header form div input{
     text-align: center;
     text-decoration: underline;
     margin-top: 7vh;
+    /*margin-bottom: 10vh;*/
 }
 
 #gallery {
@@ -74,7 +75,7 @@ header form div input{
 
 #gallery div {
     flex-basis: 25%;
-    margin-top: 10vh;
+    margin-top: 10vh; /* get rid of and apply bottom margin for title if using widget */
 }
 
 #gallery div img {
@@ -84,8 +85,12 @@ header form div input{
 
 #gallery div p {
     margin: 0px;
-    /*max-width: 15vw;
-    margin-left: 5vw;*/
+}
+
+
+#frame {
+    padding: 0px;
+    height: 81px; /* remove excess height for the widget */
 }
 
 @media (max-width: 950px) {

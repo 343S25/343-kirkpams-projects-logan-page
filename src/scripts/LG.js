@@ -3,7 +3,7 @@ let art_list = JSON.parse (localStorage.getItem ('art_list'));
 if (art_list == undefined)
 {
     art_list = [];
-} 
+}
 
 // change header background color
 document.getElementById ('header_bg').addEventListener ('click', function (event) {
@@ -68,9 +68,6 @@ document.getElementById ('search_bg').addEventListener ('click', function (event
     let search_btn = document.getElementById ('search-btn');
     search_btn.style.backgroundColor = color;
 
-    let clear_btn = document.getElementById ('clear-btn');
-    clear_btn.style.backgroundColor = color;
-
     localStorage.setItem ('search_bg',  color);  
 });
 
@@ -88,9 +85,6 @@ document.getElementById ('search_text').addEventListener ('click', function (eve
 
     let search_btn = document.getElementById ('search-btn');
     search_btn.style.color = color;
-
-    let clear_btn = document.getElementById ('clear-btn');
-    clear_btn.style.color = color;
 
     localStorage.setItem ('search_text',  color);
 });
@@ -155,7 +149,8 @@ document.getElementById ('search-btn').addEventListener ('click', async function
         cover: data.tracks.items[0].album.images[0].url,
         title: data.tracks.items[0].name,
         artists: data.tracks.items[0].artists,
-        track: data.tracks.items[0].uri
+        track: data.tracks.items[0].uri, // for playback
+        id: data.tracks.items[0].id // for widgets
     };
     
     art_list.push (art);
@@ -191,9 +186,12 @@ function addArt (art, index)
     musician.textContent = music_people.join (", ");
     musician.style.fontStyle = 'italic';
 
+    let frame = artView.getElementById ('frame');
+
     // allow the ability to play/pause the song after the image is clicked
     img.addEventListener ('click', async function () {
-        let access_token = localStorage.getItem ('access_token');
+        // Controls the playback within the Spotify app
+        /*let access_token = localStorage.getItem ('access_token');
 
         // get current devices ID
         let url = 'https://api.spotify.com/v1/me/player/devices';
@@ -242,6 +240,12 @@ function addArt (art, index)
                     device_ids: [deviceID]
                 })
             })
+        }*/
+
+        // Sets widget src to song
+        if (!frame.hasAttribute ('src'))
+        {
+            frame.setAttribute ('src', `https://open.spotify.com/embed/track/${art.id}`);
         }
     });
 
@@ -258,7 +262,7 @@ function addArt (art, index)
 
 // clear all songs from the page and local storage;
 document.getElementById ('clear-btn').addEventListener ('click', function (event){
-    event.preventDefault ();
+    event.stopPropagation ();
 
     localStorage.removeItem ('art_list');
     location.reload ();
@@ -266,7 +270,7 @@ document.getElementById ('clear-btn').addEventListener ('click', function (event
 
 // clear all customizations
 document.getElementById ('clear_customs').addEventListener ('click', function (event) {
-    event.preventDefault ();
+    event.stopPropagation ();
 
     localStorage.removeItem ('header_bg');
     localStorage.removeItem ('header_text');
@@ -307,9 +311,6 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     let search_btn = document.getElementById ('search-btn');
     search_btn.style.backgroundColor = '#CCE5FF';
 
-    let clear_btn = document.getElementById ('clear-btn');
-    clear_btn.style.backgroundColor = '#CCE5FF';
-
     let search_song_t = document.getElementById ('song');
     search_song_t.style.color = '#9B5BFF';
 
@@ -318,9 +319,6 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
 
     let search_btn_t = document.getElementById ('search-btn');
     search_btn_t.style.color = '#9B5BFF';
-
-    let clear_btn_t = document.getElementById ('clear-btn');
-    clear_btn_t.style.color = '#9B5BFF';
 
     let body_bg = document.getElementById ('body');
     body_bg.style.backgroundColor = '#7F00FF';
@@ -332,7 +330,138 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     playlist_name.textContent = 'Gallery Name';
 });
 
-// Add local storage songs to the page and color changes
+document.getElementById ('import').addEventListener ('click', function (event) {
+    event.stopPropagation ();
+
+    let importField = document.getElementById('import-file')
+    let files = importField.files;
+
+    if (files.length == 0)
+    {
+      alert ('No Files Found');
+    }
+
+    let first_file = files[0];
+
+    let file_reader = new FileReader ();
+
+    file_reader.addEventListener ('load', loadJSON);
+
+    file_reader.readAsText (first_file);
+});
+
+function loadJSON(ev) {
+    document.getElementById ('clear-btn').click ();
+    document.getElementById ('clear_customs').click ();
+
+    let result = ev.target.result;
+
+    let decode = decodeURIComponent (result);
+
+    let data = JSON.parse (decode);
+
+    // load customizations
+    let header_bg = document.getElementById ('header');
+    header_bg.style.backgroundColor = data.header_background; 
+    
+    let header_text = document.getElementById ('header');
+    header_text.style.color = data.header_text;
+
+    let spotify = document.getElementById ('spotify');
+    spotify.style.color = data.header_text;
+
+    let info = document.getElementById ('info');
+    info.style.color = data.header_text;
+
+    let links_border = document.getElementById ('links');
+    links_border.style.borderColor = data.header_border;
+
+    let title_border = document.getElementById ('title');
+    title_border.style.borderColor = data.header_border;
+    
+    let search_border = document.getElementById ('search-box');
+    search_border.style.borderColor = data.header_border;
+
+    let search_song = document.getElementById ('song');
+    search_song.style.backgroundColor = data.search_background;
+
+    let search_artist = document.getElementById ('artist');
+    search_artist.style.backgroundColor = data.search_background;
+
+    let search_btn = document.getElementById ('search-btn');
+    search_btn.style.backgroundColor = data.search_background;
+
+    let search_song_t = document.getElementById ('song');
+    search_song_t.style.color = data.search_text;
+
+    let search_artist_t = document.getElementById ('artist');
+    search_artist_t.style.color = data.search_text;
+
+    let search_btn_t = document.getElementById ('search-btn');
+    search_btn_t.style.color = data.search_text;
+
+    let body_bg = document.getElementById ('body');
+    body_bg.style.backgroundColor = data.body_background;
+
+    let body_text = document.getElementById ('body');
+    body_text.style.color = data.body_text;
+
+    let playlist_name = document.getElementById ('playlist-title');
+    if (localStorage.getItem ('playlist_name') != undefined)
+    {
+        playlist_name.textContent = data.playlist_name;
+    }
+    else
+    {
+        playlist_name.textContent = 'Gallery Name';
+    }
+
+    // load songs
+    for (let i = 0; i < data.songs.length; i++)
+    {
+         addArt (data.songs[i], i);
+    }
+
+    localStorage.setItem ('art_list', JSON.stringify (data.songs));
+    localStorage.setItem ('header_bg', data.header_background);
+    localStorage.setItem ('header_text', data.header_text);
+    localStorage.setItem ('header_border', data.header_border);
+    localStorage.setItem ('search_bg', data.search_background);
+    localStorage.setItem ('search_text', data.search_text);
+    localStorage.setItem ('body_bg', data.body_background);
+    localStorage.setItem ('body_text', data.body_text);
+    localStorage.setItem ('playlist_name', data.playlist_name);
+}
+
+document.getElementById ('export').addEventListener ('click', function (event) {
+    event.stopPropagation ();
+
+    let data = {
+        songs: art_list,
+        header_background: localStorage.getItem ('header_bg'),
+        header_text: localStorage.getItem ('header_text'),
+        header_border: localStorage.getItem ('header_border'),
+        search_background: localStorage.getItem ('search_bg'),
+        search_text: localStorage.getItem ('search_text'),
+        body_background: localStorage.getItem ('body_bg'),
+        body_text: localStorage.getItem ('body_text'),
+        playlist_name: localStorage.getItem ('playlist_name')
+    };
+
+    let str_data = JSON.stringify (data);
+
+    let encode_data = encodeURIComponent (str_data);
+
+    let url = 'data:application/json;charset=utf-8,' + encode_data;
+
+    let link = document.createElement ('a');
+    link.href = url;
+    link.download = `${document.getElementById ('playlist-title').textContent}.json`;
+
+    link.click ();
+});
+
+// load local storage
 (function () {
     // load customizations
     let header_bg = document.getElementById ('header');
@@ -365,9 +494,6 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     let search_btn = document.getElementById ('search-btn');
     search_btn.style.backgroundColor = localStorage.getItem ('search_bg');
 
-    let clear_btn = document.getElementById ('clear-btn');
-    clear_btn.style.backgroundColor = localStorage.getItem ('search_bg');
-
     let search_song_t = document.getElementById ('song');
     search_song_t.style.color = localStorage.getItem ('search_text');
 
@@ -376,9 +502,6 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
 
     let search_btn_t = document.getElementById ('search-btn');
     search_btn_t.style.color = localStorage.getItem ('search_text');
-
-    let clear_btn_t = document.getElementById ('clear-btn');
-    clear_btn_t.style.color = localStorage.getItem ('search_text');
 
     let body_bg = document.getElementById ('body');
     body_bg.style.backgroundColor = localStorage.getItem ('body_bg');
