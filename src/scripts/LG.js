@@ -360,68 +360,6 @@ function loadJSON(ev) {
 
     let data = JSON.parse (decode);
 
-    // load customizations
-    let header_bg = document.getElementById ('header');
-    header_bg.style.backgroundColor = data.header_background; 
-    
-    let header_text = document.getElementById ('header');
-    header_text.style.color = data.header_text;
-
-    let spotify = document.getElementById ('spotify');
-    spotify.style.color = data.header_text;
-
-    let info = document.getElementById ('info');
-    info.style.color = data.header_text;
-
-    let links_border = document.getElementById ('links');
-    links_border.style.borderColor = data.header_border;
-
-    let title_border = document.getElementById ('title');
-    title_border.style.borderColor = data.header_border;
-    
-    let search_border = document.getElementById ('search-box');
-    search_border.style.borderColor = data.header_border;
-
-    let search_song = document.getElementById ('song');
-    search_song.style.backgroundColor = data.search_background;
-
-    let search_artist = document.getElementById ('artist');
-    search_artist.style.backgroundColor = data.search_background;
-
-    let search_btn = document.getElementById ('search-btn');
-    search_btn.style.backgroundColor = data.search_background;
-
-    let search_song_t = document.getElementById ('song');
-    search_song_t.style.color = data.search_text;
-
-    let search_artist_t = document.getElementById ('artist');
-    search_artist_t.style.color = data.search_text;
-
-    let search_btn_t = document.getElementById ('search-btn');
-    search_btn_t.style.color = data.search_text;
-
-    let body_bg = document.getElementById ('body');
-    body_bg.style.backgroundColor = data.body_background;
-
-    let body_text = document.getElementById ('body');
-    body_text.style.color = data.body_text;
-
-    let playlist_name = document.getElementById ('playlist-title');
-    if (localStorage.getItem ('playlist_name') != undefined)
-    {
-        playlist_name.textContent = data.playlist_name;
-    }
-    else
-    {
-        playlist_name.textContent = 'Gallery Name';
-    }
-
-    // load songs
-    for (let i = 0; i < data.songs.length; i++)
-    {
-         addArt (data.songs[i], i);
-    }
-
     localStorage.setItem ('art_list', JSON.stringify (data.songs));
     localStorage.setItem ('header_bg', data.header_background);
     localStorage.setItem ('header_text', data.header_text);
@@ -431,6 +369,8 @@ function loadJSON(ev) {
     localStorage.setItem ('body_bg', data.body_background);
     localStorage.setItem ('body_text', data.body_text);
     localStorage.setItem ('playlist_name', data.playlist_name);
+
+    location.reload ();
 }
 
 document.getElementById ('export').addEventListener ('click', function (event) {
