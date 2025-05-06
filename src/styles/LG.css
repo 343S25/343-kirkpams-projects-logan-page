@@ -8,7 +8,7 @@ body {
 header {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    background-color: #9999FF;
+    background-color: #8484ff;
     color: white;
     font-family: 'lucida sans';
     top: 0%;
@@ -51,7 +51,7 @@ header form div input{
 #search input, #search button {
     margin: 1vh;
     background-color:  #CCE5FF;
-    color: #9B5BFF;
+    color: #7925ff;
 }
 
 #settings {

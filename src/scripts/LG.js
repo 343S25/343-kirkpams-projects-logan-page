@@ -284,7 +284,7 @@ document.getElementById ('clear_customs').addEventListener ('click', function (e
     localStorage.removeItem ('playlist_name');
 
     let header_bg = document.getElementById ('header');
-    header_bg.style.backgroundColor = '#9999FF'; 
+    header_bg.style.backgroundColor = '#8484ff'; 
     
     let header_text = document.getElementById ('header');
     header_text.style.color = 'white';
