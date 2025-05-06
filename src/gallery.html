@@ -98,10 +98,14 @@
             <div>
                 <figure>
                     <img id="image-template" src="No Source" alt="" data-bs-toggle="dropdown">
-                    <iframe id="frame" class="dropdown-menu" title="song-widget"></iframe>
+                    <div id="menu" class="dropdown-menu">
+                        <iframe id="frame" title="song-widget"></iframe>
+                        <br>
+                        <button type="button" id="play"><b>Play/Pause on Spotify</b></button>
+                        <button type="button" id="remove"><b>REMOVE</b></button>
+                    </div>
                     <p id="title-template"></p>
                     <p id="artist-template"></p>
-                    <p id="remove"><b>REMOVE</b></p>
                 </figure>
             </div>
         </template>

@@ -87,10 +87,18 @@ header form div input{
     margin: 0px;
 }
 
-
 #frame {
     padding: 0px;
     height: 81px; /* remove excess height for the widget */
+}
+
+#remove {
+    color: red;
+}
+
+#menu {
+    padding: 0.5vw 1vh;
+    background-color: black;
 }
 
 @media (max-width: 950px) {

@@ -188,10 +188,19 @@ function addArt (art, index)
 
     let frame = artView.getElementById ('frame');
 
-    // allow the ability to play/pause the song after the image is clicked
-    img.addEventListener ('click', async function () {
-        // Controls the playback within the Spotify app
-        /*let access_token = localStorage.getItem ('access_token');
+    // sets widget source to the song
+    img.addEventListener ('click', function () {
+        if (!frame.hasAttribute ('src'))
+        {
+            frame.setAttribute ('src', `https://open.spotify.com/embed/track/${art.id}`);
+        }
+    });
+
+    // Controls the playback within the Spotify app
+    artView.getElementById ('play').addEventListener ('click', async function (event) {
+        event.stopPropagation ();
+
+        let access_token = localStorage.getItem ('access_token');
 
         // get current devices ID
         let url = 'https://api.spotify.com/v1/me/player/devices';
@@ -240,16 +249,9 @@ function addArt (art, index)
                     device_ids: [deviceID]
                 })
             })
-        }*/
-
-        // Sets widget src to song
-        if (!frame.hasAttribute ('src'))
-        {
-            frame.setAttribute ('src', `https://open.spotify.com/embed/track/${art.id}`);
         }
     });
 
-    // removes a single song if cover is double clicked
     artView.getElementById ('remove').addEventListener ('click', function () {
         art_list.splice (index, 1);
 
